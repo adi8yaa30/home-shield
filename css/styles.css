@@ -127,10 +127,20 @@ button { font: inherit; }
   text-decoration: none;
   cursor: pointer;
   transition: transform 250ms var(--ease), background-color 250ms var(--ease),
-    color 250ms var(--ease), border-color 250ms var(--ease);
+    color 250ms var(--ease), border-color 250ms var(--ease),
+    box-shadow 250ms var(--ease);
 }
 
 .btn:hover { transform: translateY(-2px); }
+
+/* Pressed: the lift drops away, so the button reacts to the click as well as
+   to the pointer arriving. */
+.btn:active { transform: translateY(0); box-shadow: none; }
+
+.btn:focus-visible {
+  outline: 3px solid var(--blue-deep);
+  outline-offset: 3px;
+}
 
 .btn__arrow {
   display: grid;
@@ -164,10 +174,27 @@ button { font: inherit; }
 .btn--outline .btn__arrow { background: var(--blue); }
 .btn--outline .btn__arrow::before { background: var(--white); }
 
+/* An outline button fills in on hover, and its arrow inverts with it. */
+.btn--outline:hover {
+  --btn-fg: var(--white);
+  --btn-bg: var(--blue);
+  box-shadow: 0 10px 22px rgba(59, 133, 189, 0.26);
+}
+
+.btn--outline:hover .btn__arrow { background: var(--white); }
+.btn--outline:hover .btn__arrow::before { background: var(--blue); }
+
 .btn--solid { --btn-fg: var(--white); --btn-bg: var(--blue); }
 .btn--solid .btn__arrow { background: transparent; width: 1.4rem; }
 .btn--solid .btn__arrow::before { background: var(--white); }
 .btn--solid { padding-right: 1.35rem; }
+
+/* A solid button deepens rather than changing hue, so it reads as the same
+   button pressed further in. */
+.btn--solid:hover {
+  --btn-bg: var(--blue-deep);
+  box-shadow: 0 10px 22px rgba(47, 109, 156, 0.3);
+}
 
 .btn--sm {
   padding: 0.45rem 0.45rem 0.45rem 1.05rem;
@@ -219,10 +246,34 @@ button { font: inherit; }
   text-decoration: none;
   color: var(--blue-ink);
   white-space: nowrap;
-  transition: opacity 200ms var(--ease);
+  position: relative;
+  transition: color 200ms var(--ease);
 }
 
-.site-nav__link:hover { opacity: 0.65; }
+/* Underline wipes in from the left. Drawn on a pseudo-element so nothing in
+   the row moves as it appears. */
+.site-nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms var(--ease);
+}
+
+.site-nav__link:hover { color: var(--blue-deep); }
+.site-nav__link:hover::after { transform: scaleX(1); }
+
+.site-nav__link:focus-visible {
+  outline: 3px solid var(--blue-deep);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
 .site-nav__link[aria-current='page'] { font-weight: 700; }
 
 .nav-toggle {
@@ -235,7 +286,10 @@ button { font: inherit; }
   color: var(--blue);
   cursor: pointer;
   place-items: center;
+  transition: background-color 200ms var(--ease), color 200ms var(--ease);
 }
+
+.nav-toggle:hover { background: var(--blue-soft); color: var(--blue-deep); }
 
 .nav-toggle__bars,
 .nav-toggle__bars::before,
@@ -1225,16 +1279,25 @@ button { font: inherit; }
 .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
 
 .footer-col a {
+  display: inline-block;
   color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.01em;
   text-transform: none;
-  transition: color 200ms var(--ease);
+  transition: color 200ms var(--ease), transform 200ms var(--ease);
 }
 
-.footer-col a:hover { color: var(--white); }
+/* Nudges toward the reader as it brightens — enough to register in a column
+   of similar-looking links. */
+.footer-col a:hover { color: var(--white); transform: translateX(4px); }
+
+.footer-col a:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 
 /* The contact column carries real detail rather than a single link, so the
    terms sit small and quiet above each value and the enquiry link closes it. */
@@ -1252,6 +1315,24 @@ button { font: inherit; }
   margin: 0;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.92);
+}
+
+/* The phone number is a link; it should look like one when pointed at. */
+.footer-contact__list dd a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.footer-contact__list dd a:hover {
+  color: var(--white);
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-contact__list dd a:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
 }
 
 .footer-contact__cta {
@@ -1863,12 +1944,19 @@ select.field__input { appearance: none; background-image: none; cursor: pointer;
 }
 
 .contact-social a {
+  display: inline-block;
   color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
-  transition: color 200ms var(--ease);
+  transition: color 200ms var(--ease), transform 200ms var(--ease);
 }
 
-.contact-social a:hover { color: var(--white); }
+.contact-social a:hover { color: var(--white); transform: translateX(4px); }
+
+.contact-social a:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 
 .contact-map {
   display: grid;
