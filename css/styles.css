@@ -348,11 +348,16 @@ button { font: inherit; }
 
 /* Slide indicators. Square by request, and placed top-right where neither the
    chip (bottom) nor the CTA plate (bottom-left) can reach them. */
+/* Centred along the bottom of the card, where a swipe indicator is looked
+   for. The offset keeps them in the clear band between the CTA plate below
+   and the feature chip above — both of which sit off to one side, so the
+   centre line stays free at every width. */
 .hero__dots {
   position: absolute;
   z-index: 3;
-  top: clamp(0.6rem, 2.4vw, 1.6rem);
-  right: clamp(0.6rem, 3.4vw, 3.1rem);
+  bottom: clamp(3.5rem, 6vw, 5rem);
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 0.25rem;
 }
@@ -591,21 +596,19 @@ button { font: inherit; }
     border-radius: var(--radius-lg);
   }
 
-  /* Label and arrow stay on one line, side by side. Half a phone width is
-     tight, so the type tightens and the arrow shrinks to make room. */
+  /* Half a phone width leaves no room for these labels on a single line: at
+     the old size they filled the button to within 3px. The label wraps over
+     two lines instead, which buys back enough room for readable type. */
   .hero__actions .btn {
     justify-content: space-between;
-    gap: 0.35rem;
+    gap: 0.4rem;
     width: 100%;
     min-height: 3.25rem;
-    padding: 0.45rem 0.4rem 0.45rem 0.6rem;
+    padding: 0.5rem 0.45rem 0.5rem 0.7rem;
     border-radius: 999px;
-    font-size: 0.55rem;
+    font-size: 0.72rem;
     letter-spacing: 0.01em;
-    line-height: 1.2;
-    /* Without this the label is a shrinkable anonymous flex item and wraps
-       even when there is room for it on one line. */
-    white-space: nowrap;
+    line-height: 1.25;
   }
 
   .hero__actions .btn__arrow { width: 1.4rem; height: 1.4rem; }
