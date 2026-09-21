@@ -258,7 +258,7 @@ button { font: inherit; }
 }
 
 .site-logo { display: inline-flex; flex: none; }
-.site-logo img { width: clamp(46px, 5vw, 62px); height: auto; }
+.site-logo img { width: clamp(56px, 6vw, 76px); height: auto; }
 
 .site-nav { display: flex; align-items: center; gap: clamp(1.2rem, 3vw, 2.6rem); }
 
