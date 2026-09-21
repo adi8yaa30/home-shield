@@ -1,0 +1,61 @@
+# Home Shield — uPVC Profiles website
+
+Static marketing site for Home Shield uPVC window and door profile systems.
+Five pages, no build step, no dependencies — plain HTML, CSS and JavaScript.
+
+## Running it locally
+
+Any static server will do; the site uses relative paths throughout.
+
+```bash
+python3 -m http.server 4173
+```
+
+Then open <http://localhost:4173>.
+
+## Layout
+
+```
+index.html            Home
+about.html            About Home Shield
+products.html         Profile colours and finishes
+applications.html     Where the profiles are used
+contact.html          Enquiry form, details, map
+
+css/styles.css        All styling, one file
+js/ui.js              Shared behaviour: nav, carousels, films, dialogs, validation
+js/data.js            Product, application and system data used by the pages
+js/home.js            Home page wiring
+js/products.js        Products page wiring
+js/page.js            About / Applications / Contact wiring
+
+assets/               Images (.webp), video (assets/video/), catalogue PDF
+robots.txt            Crawler rules
+sitemap.xml           Five URLs
+DEPLOY.md             Launch checklist — read this before going live
+```
+
+Cache busting is manual: CSS and JS are referenced with `?v=NN`. Bump the
+number in every page when you change one of those files, or browsers will
+keep serving the old copy.
+
+## Images and video
+
+Images ship as WebP, sized to what the page actually displays. Video ships as
+WebM with an MP4 fallback, in a full-size and a 960px cut; the script picks
+the cut that suits the viewport and loads it after the page has finished
+loading, so video never competes with the first paint.
+
+The original PNGs, the Figma exports and the master video files are **not in
+this repo** (see `.gitignore`) — keep your own backup of those.
+
+## Before this goes live
+
+`DEPLOY.md` has the full checklist. The two that block launch:
+
+1. **The domain is a placeholder.** Every canonical, Open Graph tag,
+   `robots.txt` and `sitemap.xml` points at `https://www.homeshield.example`.
+2. **No form reaches an inbox.** The enquiry form, the consultation dialog and
+   the catalogue download gate all collect details and discard them.
+
+Still outstanding beyond that: the email address and the social links.

@@ -1,0 +1,19 @@
+# Home Shield — robots.txt
+#
+# TODO BEFORE LAUNCH: replace www.homeshield.example with the real domain.
+#   Run from the project root:
+#   grep -rl 'www.homeshield.example' . | xargs sed -i '' 's#https://www.homeshield.example#https://YOUR-DOMAIN.com#g'
+
+User-agent: *
+Allow: /
+
+# Design source files and the raw originals are not content.
+Disallow: /colored-profile/
+Disallow: /instructions.md
+Disallow: /*-figma-design*
+
+# The catalogue is meant to be requested through the form on the site, so it
+# should not turn up as a direct hit in search results.
+Disallow: /assets/home-shield-catalogue.pdf
+
+Sitemap: https://www.homeshield.example/sitemap.xml

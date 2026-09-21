@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+._*
+
+# Local tool settings (launch.json is shared, this one is per-machine)
+.claude/settings.local.json
+
+# Design sources and raw masters. These are not used by the site — the shipped
+# assets are the .webp images and the encoded cuts in assets/video/. They are
+# kept out of the repo because they are large and would dominate its size.
+# KEEP YOUR OWN BACKUP: they are not in git.
+*-figma-design*.png
+home-page-figma-design-image.png
+assets/factory.mp4
+assets/homeshield_landscape.mp4
+assets/homeshield_motions.mp4
+
+# Editor / OS noise
+Thumbs.db
+*.swp
