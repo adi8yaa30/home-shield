@@ -53,11 +53,14 @@ are not used by any page.
 
 ## Before this goes live
 
-`DEPLOY.md` has the full checklist. The two that block launch:
+`DEPLOY.md` has the full checklist. The one that still blocks launch:
 
-1. **The domain is a placeholder.** Every canonical, Open Graph tag,
-   `robots.txt` and `sitemap.xml` points at `https://www.homeshield.example`.
-2. **No form reaches an inbox.** The enquiry form, the consultation dialog and
-   the catalogue download gate all collect details and discard them.
+**No form reaches an inbox.** The enquiry form, the consultation dialog and the
+catalogue download gate all collect details and discard them. The download gate
+is the one to watch — it asks who is downloading, hands over the PDF, then
+throws the answer away.
+
+The site is set up for `https://thehomeshield.in` (no `www`). Serve that exact
+host and redirect `www` and plain `http` to it, so only one URL ever answers.
 
 Still outstanding beyond that: the email address and the social links.

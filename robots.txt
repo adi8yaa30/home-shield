@@ -1,8 +1,4 @@
 # Home Shield — robots.txt
-#
-# TODO BEFORE LAUNCH: replace www.homeshield.example with the real domain.
-#   Run from the project root:
-#   grep -rl 'www.homeshield.example' . | xargs sed -i '' 's#https://www.homeshield.example#https://YOUR-DOMAIN.com#g'
 
 User-agent: *
 Allow: /
@@ -16,4 +12,4 @@ Disallow: /*-figma-design*
 # should not turn up as a direct hit in search results.
 Disallow: /assets/home-shield-catalogue.pdf
 
-Sitemap: https://www.homeshield.example/sitemap.xml
+Sitemap: https://thehomeshield.in/sitemap.xml

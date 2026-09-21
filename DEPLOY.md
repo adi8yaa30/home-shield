@@ -1,15 +1,17 @@
 # Launch checklist
 
-## 1. Set the real domain (required)
+## 1. Domain — done
 
-Every canonical, Open Graph URL, `robots.txt` and `sitemap.xml` currently points at
-`https://www.homeshield.example`. That's the RFC 2606 reserved TLD — it can never
-resolve, so nothing breaks if this ships by accident, but search engines will index
-nothing until it's replaced.
+Every canonical, Open Graph URL, `robots.txt` and `sitemap.xml` points at
+`https://thehomeshield.in`.
 
-```bash
-grep -rl 'www.homeshield.example' . | xargs sed -i '' 's#https://www.homeshield.example#https://YOUR-DOMAIN.com#g'
-```
+Two things to line up when DNS is configured:
+
+- **Serve that exact host.** The canonicals name `thehomeshield.in` with no
+  `www`. Point `www.thehomeshield.in` at a 301 redirect to the bare domain, so
+  only one host ever answers.
+- **HTTPS.** Every canonical is `https://`; make sure plain `http://` redirects
+  there rather than serving the site twice.
 
 ## 2. Clean URLs (only if your host does them)
 
