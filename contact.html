@@ -37,7 +37,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <noscript><link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="css/styles.css?v=56">
+<link rel="stylesheet" href="css/styles.css?v=57">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -134,7 +134,12 @@
           <h2 id="enquiry-title">Send an enquiry</h2>
           <p class="contact-form-panel__text">Fill this in and we will come back to you with a specification and a lead time.</p>
 
-          <form class="contact-form" data-pending-form novalidate>
+          <form class="contact-form" data-pending-form data-lead="enquiry" novalidate>
+            <div class="field field--hp" aria-hidden="true">
+              <label for="hp-company">Company</label>
+              <input id="hp-company" name="company" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
             <div class="field">
               <label class="field__label" for="name">Full name</label>
               <input class="field__input" id="name" name="name" type="text" autocomplete="name"
@@ -310,8 +315,8 @@
   </div>
 </footer>
 
-<script src="js/ui.js?v=51" defer></script>
-<script src="js/page.js?v=49" defer></script>
+<script src="js/ui.js?v=58" defer></script>
+<script src="js/page.js?v=57" defer></script>
 
 <!-- ===================== Consultation dialog ====================== -->
 <!-- Opened by every "Book a Consultation" button. Uses <dialog> so the
@@ -323,8 +328,16 @@
 
     <h2 class="modal__title" id="consult-title">Book a Consultation</h2>
     <p class="modal__lede">Tell us about the opening and we will come back with a recommended series and a lead time.</p>
+    <p class="modal__subject" data-consult-subject hidden></p>
 
-    <form class="modal__form" data-pending-form novalidate>
+    <form class="modal__form" data-pending-form data-lead="consultation" novalidate>
+      <div class="field field--hp" aria-hidden="true">
+        <label for="consult-company">Company</label>
+        <input id="consult-company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <input type="hidden" name="product" data-consult-product value="">
+
       <div class="field">
         <label class="field__label" for="consult-name">Full name</label>
         <input class="field__input" id="consult-name" name="name" type="text" autocomplete="name"

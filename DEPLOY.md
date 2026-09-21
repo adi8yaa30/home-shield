@@ -43,24 +43,23 @@ don't re-compress them.
   `data-pending-asset` to find every one. (Phone, address and the catalogue PDF
   are done.)
 
-## 5. Connect the forms — they currently send nothing
+## 5. Connect the forms — one step left
 
-Three forms collect details and **none of them reach an inbox**:
+The code is done. What is missing is the endpoint it posts to.
 
-| Form | Where |
-|---|---|
-| Enquiry | Contact page |
-| Book a Consultation | Modal, every page |
-| Catalogue download gate | Modal, home + products |
+| Form | Where | Lands in |
+|---|---|---|
+| Enquiry | Contact page | Contact enquiries |
+| Book a Consultation | Modal, every page | Consultation requests |
+| Product enquiry | Enquire, per finish | Consultation requests, with the finish named |
+| Catalogue download gate | Modal, home + products | Catalogue downloads |
 
-The first two tell the visitor nothing was sent. The **download gate is the one
-to watch**: it asks who is downloading, hands over the PDF, and then discards
-what it collected — so it looks like lead capture while capturing nothing.
+Follow `backend/README.md`: create the sheet, paste `backend/Code.gs`, deploy
+it as a web app, then paste the URL into `LEAD_ENDPOINT` in `js/ui.js` and bump
+that file's `?v=`.
 
-Wire all three to an endpoint (Formspree, Web3Forms, or your host's form
-handling). In `js/ui.js` the two TODOs are in `initPendingForms()` and
-`initCatalogueGate()`. The download deliberately does not depend on that request
-succeeding — someone who filled the form in gets the file either way.
+Until that URL is set, every form still validates and responds — it just tells
+the visitor nothing was sent and gives them the phone number.
 
 **The download gate is a deterrent, not protection.** The catalogue URL is kept
 in `js/ui.js` rather than in a link, so it cannot be saved by right-clicking the

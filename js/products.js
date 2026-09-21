@@ -58,8 +58,12 @@
       select_.appendChild(name);
       select_.addEventListener('click', function () { select(product); });
 
+      // Opens the consultation dialog with this finish already named. The
+      // href stays as the no-JS route, exactly as the other openers do.
       var enquire = el('a', 'btn btn--enquire', {
         href: ENQUIRY_HREF,
+        'data-consult-open': '',
+        'data-product': collection.title + ' — ' + product.name,
         'aria-label': 'Enquire about ' + product.name
       });
       enquire.appendChild(document.createTextNode('Enquire'));

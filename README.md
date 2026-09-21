@@ -55,10 +55,11 @@ are not used by any page.
 
 `DEPLOY.md` has the full checklist. The one that still blocks launch:
 
-**No form reaches an inbox.** The enquiry form, the consultation dialog and the
-catalogue download gate all collect details and discard them. The download gate
-is the one to watch — it asks who is downloading, hands over the PDF, then
-throws the answer away.
+**Set the lead-capture endpoint.** Every form posts to a Google Apps Script web
+app that writes to a Google Sheet and emails a notification. Follow
+`backend/README.md`, then paste the deployment URL into `LEAD_ENDPOINT` in
+`js/ui.js`. Until that is set the forms validate and respond, but nothing is
+recorded.
 
 The site is set up for `https://thehomeshield.in` (no `www`). Serve that exact
 host and redirect `www` and plain `http` to it, so only one URL ever answers.

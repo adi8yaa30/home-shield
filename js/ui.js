@@ -1140,6 +1140,81 @@
   }
 
   /* ------------------------------------------------------------------ *
+   * Lead capture
+   * ------------------------------------------------------------------ */
+
+  /**
+   * The Apps Script web app that records submissions and sends the email.
+   * Paste the deployment URL here — see backend/README.md. While it is blank
+   * the forms still validate and respond; they simply say nothing was sent.
+   */
+  var LEAD_ENDPOINT = '';
+
+  /**
+   * The endpoint in use. A `window.HOME_SHIELD_ENDPOINT` set before this
+   * script loads wins, which is how you point a staging build somewhere else
+   * without editing this file.
+   */
+  function leadEndpoint() {
+    return global.HOME_SHIELD_ENDPOINT || LEAD_ENDPOINT;
+  }
+
+  function endpointReady() {
+    var url = leadEndpoint();
+    return typeof url === 'string' && url.indexOf('http') === 0;
+  }
+
+  /**
+   * Post one submission.
+   *
+   * Sent as text/plain on purpose: that makes it a "simple" cross-origin
+   * request, so the browser skips the preflight OPTIONS that Apps Script
+   * cannot answer. The body is still JSON and the script parses it as such.
+   */
+  function sendLead(form, fields) {
+    if (!endpointReady()) return Promise.reject(new Error('no endpoint'));
+
+    var payload = {
+      form: form,
+      page: global.location ? global.location.pathname : '',
+      origin: global.location ? global.location.origin : '',
+      source: document.title
+    };
+
+    Object.keys(fields).forEach(function (key) {
+      if (fields[key]) payload[key] = fields[key];
+    });
+
+    return fetch(leadEndpoint(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      return response;
+    });
+  }
+
+  /** Read a form into a plain object keyed the way the backend expects. */
+  function readForm(form) {
+    var value = function (name) {
+      var field = form.querySelector('[name="' + name + '"]');
+      return field ? field.value.trim() : '';
+    };
+
+    return {
+      name: value('name'),
+      phone: value('phone'),
+      email: value('email'),
+      city: value('city'),
+      enquiryType: value('enquiry-type'),
+      product: value('product'),
+      message: value('message'),
+      company: value('company')      // honeypot; real people leave it empty
+    };
+  }
+
+  /* ------------------------------------------------------------------ *
    * Form validation
    * ------------------------------------------------------------------ */
 
@@ -1263,11 +1338,49 @@
           return;
         }
 
-        if (!notice) return;
-        notice.classList.remove('is-error');
-        notice.textContent = 'Thanks — this form is not connected to an inbox yet, ' +
-          'so nothing has been sent. Please call us in the meantime.';
+        var kind = form.getAttribute('data-lead') || 'enquiry';
+        submitForm(form, kind, notice, 'Thanks — we have your details and will be in touch shortly.');
       });
+    });
+  }
+
+  /**
+   * Send a validated form, and say what happened.
+   *
+   * The button is disabled while the request is in flight so a second click
+   * cannot file the same lead twice. A failure is reported honestly, with the
+   * phone number as the fallback — quietly swallowing it would leave someone
+   * believing they had been in touch.
+   */
+  function submitForm(form, kind, notice, successText, onDone) {
+    var button = form.querySelector('button[type="submit"]');
+    var fields = readForm(form);
+
+    function say(text, isError) {
+      if (!notice) return;
+      notice.textContent = text;
+      notice.classList.toggle('is-error', !!isError);
+    }
+
+    if (!endpointReady()) {
+      say('Thanks — this form is not connected to an inbox yet, so nothing has ' +
+          'been sent. Please call us on +91 93954 44686 in the meantime.', true);
+      if (onDone) onDone(false);
+      return;
+    }
+
+    if (button) button.disabled = true;
+    say('Sending…');
+
+    sendLead(kind, fields).then(function () {
+      say(successText);
+      form.reset();
+      form.removeAttribute('data-submitted');
+    }).catch(function () {
+      say('Sorry — that did not go through. Please call us on +91 93954 44686.', true);
+    }).then(function () {
+      if (button) button.disabled = false;
+      if (onDone) onDone(true);
     });
   }
 
@@ -1314,16 +1427,30 @@
    */
   function initConsultDialog() {
     var dialog = document.getElementById('consult-dialog');
-    var openers = document.querySelectorAll('[data-consult-open]');
-    if (!dialog || !openers.length || typeof dialog.showModal !== 'function') return;
+    if (!dialog || typeof dialog.showModal !== 'function') return;
 
     var modal = setupDialog(dialog);
+    var productField = dialog.querySelector('[data-consult-product]');
+    var subject = dialog.querySelector('[data-consult-subject]');
 
-    Array.prototype.forEach.call(openers, function (link) {
-      link.addEventListener('click', function (event) {
-        event.preventDefault();
-        modal.open();
-      });
+    // Delegated, because the Products page builds its Enquire buttons from
+    // data after this runs. A listener per button would miss every one.
+    document.addEventListener('click', function (event) {
+      var opener = event.target.closest ? event.target.closest('[data-consult-open]') : null;
+      if (!opener) return;
+
+      event.preventDefault();
+
+      // An enquiry raised against a particular finish carries it through, so
+      // the lead says which colour they were looking at.
+      var product = opener.getAttribute('data-product') || '';
+      if (productField) productField.value = product;
+      if (subject) {
+        subject.textContent = product ? 'About: ' + product : '';
+        subject.hidden = !product;
+      }
+
+      modal.open();
     });
   }
 
@@ -1379,14 +1506,21 @@
         return;
       }
 
-      // TODO: post these details to the enquiry endpoint once there is one.
-      // The download is deliberately not gated on that request succeeding —
-      // someone who filled the form in should get the file either way.
+      // The file goes first. Recording the lead matters, but not enough to
+      // make someone wait on a network round trip for a PDF they have just
+      // asked for — and not enough to withhold it if the backend is down.
       startDownload();
 
       if (notice) {
         notice.classList.remove('is-error');
         notice.textContent = 'Thanks — your download is starting.';
+      }
+
+      if (endpointReady()) {
+        sendLead('catalogue', readForm(form)).catch(function () {
+          // Nothing to tell the visitor: they have the file. The failure is
+          // recorded by the backend's own error log when it can be reached.
+        });
       }
     });
   }
@@ -1425,6 +1559,7 @@
     initFeatureChip: initFeatureChip,
     initFilms: initFilms,
     initPendingForms: initPendingForms,
+    sendLead: sendLead,
     initConsultDialog: initConsultDialog,
     initCatalogueGate: initCatalogueGate,
     initHeroSlides: initHeroSlides,

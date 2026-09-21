@@ -2134,6 +2134,30 @@ select.field__input { appearance: none; background-image: none; cursor: pointer;
 
 .modal__notice.is-error { color: #b4232a; }
 
+/* Honeypot: a field only a bot fills in. Off-screen rather than display:none,
+   which some bots skip. */
+.field--hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Names the finish someone clicked "Enquire" on, so the dialog shows what it
+   is about rather than asking them to say it again. */
+.modal__subject {
+  margin: -0.5rem 0 clamp(1.25rem, 3vw, 1.75rem);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--blue-tint);
+  color: var(--blue-deep);
+  font-size: 0.85rem;
+  font-weight: 600;
+  justify-self: start;
+  width: fit-content;
+}
+
 /* --------------------------- Reduced motion ----------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
