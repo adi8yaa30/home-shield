@@ -10,7 +10,7 @@
 
 var CONFIG = {
   // Where notifications go. Comma-separate for several recipients.
-  NOTIFY_EMAIL: 'adityachoudhary3010@gmail.com',
+  NOTIFY_EMAIL: 'globaltradegroupghy@gmail.com',
 
   // Leave blank to use the sheet this script is bound to. Set it to a sheet
   // ID if you deploy the script standalone instead.

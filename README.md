@@ -64,4 +64,4 @@ recorded.
 The site is set up for `https://thehomeshield.in` (no `www`). Serve that exact
 host and redirect `www` and plain `http` to it, so only one URL ever answers.
 
-Still outstanding beyond that: the email address and the social links.
+Still outstanding beyond that: the Instagram and Facebook links.

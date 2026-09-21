@@ -39,9 +39,8 @@ don't re-compress them.
 - Submit `sitemap.xml` in Google Search Console.
 - Re-test Core Web Vitals on the real host (PageSpeed Insights). Local numbers
   don't include network latency, TLS, or CDN behaviour.
-- Fill in the placeholder email and the social links — search for
-  `data-pending-asset` to find every one. (Phone, address and the catalogue PDF
-  are done.)
+- Fill in the Instagram and Facebook links — search for `data-pending-asset`
+  to find them. (Phone, email, address and the catalogue PDF are done.)
 
 ## 5. Connect the forms — one step left
 
