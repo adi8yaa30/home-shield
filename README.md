@@ -46,8 +46,10 @@ WebM with an MP4 fallback, in a full-size and a 960px cut; the script picks
 the cut that suits the viewport and loads it after the page has finished
 loading, so video never competes with the first paint.
 
-The original PNGs, the Figma exports and the master video files are **not in
-this repo** (see `.gitignore`) — keep your own backup of those.
+The superseded PNGs were deleted once WebP replaced them. The Figma exports
+and the master video files (the originals, with audio) are tracked here on
+purpose: they are the only copies, so the repo doubles as their backup. They
+are not used by any page.
 
 ## Before this goes live
 
