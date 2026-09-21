@@ -1269,7 +1269,10 @@ button { font: inherit; }
 
 .site-footer__panel {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 1.4fr);
+  /* The brand column carries the full lockup, so it takes a wider share than
+     it did when it held only the square mark — below roughly 200px the
+     "and windows" line stops being readable. */
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 1.3fr);
   gap: clamp(1.5rem, 3vw, 2.5rem);
   padding: clamp(1.75rem, 4vw, 3rem);
   border-radius: var(--radius-xl);
@@ -1282,16 +1285,20 @@ button { font: inherit; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  gap: 1.1rem;
+  /* Trimmed so more of the column goes to the lockup than to white space. */
+  padding: clamp(1.1rem, 2.2vw, 1.75rem);
   border-radius: var(--radius-lg);
   background: var(--white);
   text-align: center;
 }
 
-/* height:auto matters here: the markup's height attribute applies as a
-   presentational hint, so overriding only the width squashes the mark. */
-.footer-brand img { width: clamp(70px, 9vw, 110px); height: auto; }
+/* The footer carries the full lockup — mark plus wordmark and strapline — so
+   it needs roughly twice the width the bare mark did, or the smallest line
+   stops being legible. height:auto matters because the markup's height
+   attribute applies as a presentational hint, and overriding only the width
+   would squash it. */
+.footer-brand img { width: clamp(190px, 16vw, 230px); height: auto; }
 .footer-brand p { color: var(--blue-ink); font-size: 0.85rem; }
 
 /* The column heading is the loud one: display face, larger, full white, with a
