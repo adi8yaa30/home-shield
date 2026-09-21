@@ -184,6 +184,39 @@ button { font: inherit; }
 .btn--outline:hover .btn__arrow { background: var(--white); }
 .btn--outline:hover .btn__arrow::before { background: var(--blue); }
 
+/* On a blue panel the default hover fill is the panel's own colour, so the
+   button dissolves into its background at the moment it should stand out.
+   Here it fills light instead — the same "solid on hover" idea, inverted to
+   suit what is behind it. Add any new blue panel to this list. */
+.series__panel .btn--outline:hover,
+.systems__panel .btn--outline:hover,
+.why__panel .btn--outline:hover,
+.collection__panel .btn--outline:hover,
+.site-footer__panel .btn--outline:hover {
+  --btn-fg: var(--blue-deep);
+  --btn-bg: var(--white);
+  --btn-border: var(--white);
+  box-shadow: 0 10px 22px rgba(16, 38, 56, 0.28);
+}
+
+/* The arrow stays a dark disc with a white head, rather than inverting to
+   white-on-white against the now-light button. */
+.series__panel .btn--outline:hover .btn__arrow,
+.systems__panel .btn--outline:hover .btn__arrow,
+.why__panel .btn--outline:hover .btn__arrow,
+.collection__panel .btn--outline:hover .btn__arrow,
+.site-footer__panel .btn--outline:hover .btn__arrow {
+  background: var(--blue-deep);
+}
+
+.series__panel .btn--outline:hover .btn__arrow::before,
+.systems__panel .btn--outline:hover .btn__arrow::before,
+.why__panel .btn--outline:hover .btn__arrow::before,
+.collection__panel .btn--outline:hover .btn__arrow::before,
+.site-footer__panel .btn--outline:hover .btn__arrow::before {
+  background: var(--white);
+}
+
 .btn--solid { --btn-fg: var(--white); --btn-bg: var(--blue); }
 .btn--solid .btn__arrow { background: transparent; width: 1.4rem; }
 .btn--solid .btn__arrow::before { background: var(--white); }
