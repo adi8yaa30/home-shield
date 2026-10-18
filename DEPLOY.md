@@ -17,23 +17,9 @@ Three things to line up when DNS is configured:
   `ALLOWED_ORIGINS` with it and redeploy the Apps Script, or every form will
   start failing silently.
 
-### If thehomeshield.in was ever live
-
-The site previously named `thehomeshield.in`. If that domain was only ever
-registered — never served, never indexed — ignore this and just point the new
-one at the host.
-
-If it did serve the site, treat this as a domain move rather than a swap:
-
-1. Keep the old domain registered and pointed at the host.
-2. 301-redirect every path on it to the same path on the new domain, not all
-   to the home page — `/products.html` to `/products.html`.
-3. Add both properties in Google Search Console and use **Change of address**
-   on the old one. Without it the new domain starts from nothing.
-4. Leave the redirects up for at least a year. They are what carries the
-   ranking across; removing them early throws it away.
-5. Update the Google Business Profile, and anywhere else the old URL was
-   published.
+The earlier `thehomeshield.in` was registered but never served and never
+indexed, so there is nothing to migrate and no redirects to keep: point the new
+domain at the host and that is the whole of it.
 
 ## 2. Clean URLs (only if your host does them)
 
