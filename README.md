@@ -21,6 +21,7 @@ about.html            About Home Shield
 products.html         Profile colours and finishes
 applications.html     Where the profiles are used
 contact.html          Enquiry form, details, map
+404.html              Not-found page (absolute paths, noindex, not in sitemap)
 
 css/styles.css        All styling, one file
 js/ui.js              Shared behaviour: nav, carousels, films, dialogs, validation

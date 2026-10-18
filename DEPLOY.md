@@ -20,7 +20,19 @@ resolve. Netlify, Vercel and Cloudflare Pages also serve `/about` — if you're 
 one of those, drop the suffixes in `sitemap.xml` and in each page's
 `rel="canonical"`, and pick one form so the two never disagree.
 
-## 3. Cache headers (biggest remaining win)
+## 3. The 404 page
+
+`404.html` exists and matches the site. Most static hosts serve it for unknown
+paths automatically (Netlify, Vercel, Cloudflare Pages, GitHub Pages); Apache
+needs `ErrorDocument 404 /404.html` and nginx needs `error_page 404 /404.html`.
+
+Whatever you use, it must return a real **404 status**, not 200 with the page
+body — a 200 makes it a soft 404 and Google indexes the dead URL. The page is
+`noindex`, carries no canonical, and is deliberately absent from the sitemap.
+Its asset paths are absolute (`/css/...`) because it is served at whatever URL
+the visitor mistyped, so relative paths would resolve against that and break.
+
+## 4. Cache headers (biggest remaining win)
 
 Assets are fingerprinted by `?v=` query strings, so they can be cached hard:
 
@@ -34,15 +46,18 @@ Assets are fingerprinted by `?v=` query strings, so they can be cached hard:
 Enable Brotli or gzip for HTML, CSS and JS. WebP and WebM are already compressed —
 don't re-compress them.
 
-## 4. After going live
+## 5. After going live
 
 - Submit `sitemap.xml` in Google Search Console.
 - Re-test Core Web Vitals on the real host (PageSpeed Insights). Local numbers
   don't include network latency, TLS, or CDN behaviour.
 - Fill in the Instagram and Facebook links — search for `data-pending-asset`
-  to find them. (Phone, email, address and the catalogue PDF are done.)
+  to find them. (Phone, email, address and the catalogue PDF are done.) When
+  you have the real URLs, add them to the `sameAs` array in the `Organization`
+  block in `index.html` too, so search engines tie the accounts to the brand.
+- Confirm the 404 returns a 404 status: `curl -I https://thehomeshield.in/nope`.
 
-## 5. Connect the forms — one step left
+## 6. Connect the forms — one step left
 
 The code is done. What is missing is the endpoint it posts to.
 

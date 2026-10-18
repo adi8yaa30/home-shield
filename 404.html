@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Page Not Found | Home Shield</title>
+<meta name="description" content="That page does not exist on the Home Shield site. Use the links here to reach the profile range, applications or the enquiry form.">
+
+<!-- A 404 is served at whatever URL the visitor mistyped, so every path on
+     this page is absolute. Relative paths would resolve against that unknown
+     URL and break. For the same reason there is no canonical and no sitemap
+     entry: this page should never be indexed under any address. -->
+<meta name="robots" content="noindex, follow">
+
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/logo.webp" sizes="any" type="image/webp">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<noscript><link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+<link rel="stylesheet" href="/css/styles.css?v=64">
+</head>
+<body>
+
+<!-- ============================ Header ============================ -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-logo" href="/" aria-label="Home Shield — home">
+      <img src="/assets/logo.webp" alt="Home Shield" width="62" height="62" fetchpriority="high" decoding="async">
+    </a>
+
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" data-nav-panel aria-label="Primary">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="/products.html">Products</a></li>
+        <li><a class="site-nav__link" href="/applications.html">Applications</a></li>
+        <li><a class="site-nav__link" href="/about.html">About Us</a></li>
+        <li><a class="site-nav__link" href="/contact.html">Contact Us</a></li>
+      </ul>
+      <a class="btn btn--solid" href="/contact.html#enquiry">Book a Consultation<span class="btn__arrow" aria-hidden="true"></span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">Page Not Found</h1>
+      <p class="page-hero__text">The address you followed does not exist on this site — it may have been moved, or mistyped. Everything below is still where it should be.</p>
+      <p>
+        <a class="btn btn--solid" href="/">Back to the home page<span class="btn__arrow" aria-hidden="true"></span></a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ Footer ============================ -->
+<footer class="site-footer" aria-labelledby="footer-title">
+  <h2 class="visually-hidden" id="footer-title">Site footer</h2>
+  <div class="container">
+    <div class="site-footer__panel">
+      <div class="footer-brand">
+        <img src="/assets/footer-logo.webp" alt="Home Shield — uPVC profile and windows" width="560" height="442" loading="lazy" decoding="async">
+        <p>uPVC window and door profile systems engineered to stand up to sun, storm, and time.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Explore">
+        <h3 class="footer-col__title">Explore</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/products.html">Products</a></li>
+          <li><a href="/applications.html">Applications</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h3 class="footer-col__title">Get in touch</h3>
+        <dl class="footer-contact__list">
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:globaltradegroupghy@gmail.com">globaltradegroupghy@gmail.com</a></dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd><a href="tel:+919395444686">+91 93954 44686</a></dd>
+          </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>Mon – Sat, 9:00 – 18:00</dd>
+          </div>
+        </dl>
+        <a class="footer-contact__cta" href="/contact.html">Send an enquiry<span aria-hidden="true">&rarr;</span></a>
+      </div>
+
+      <!-- Map at the coordinates from the supplied Google Maps share link. -->
+      <a class="footer-map" href="https://maps.app.goo.gl/ZkyxiGFn6HnoAAkK6" target="_blank" rel="noopener" aria-label="Open the Home Shield office location in Google Maps">
+        <iframe
+          src="https://www.google.com/maps?q=26.133371,91.734627&amp;z=15&amp;output=embed"
+          title="Map showing the Home Shield office location"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          tabindex="-1"></iframe>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Only the shared behaviour is needed here: the nav. No data, no page
+     wiring, no dialogs — there is nothing on this page to drive. -->
+<script src="/js/ui.js?v=58" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.HomeShieldUI) { window.HomeShieldUI.initNavigation(); }
+  });
+</script>
+</body>
+</html>
