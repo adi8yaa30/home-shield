@@ -1,17 +1,39 @@
 # Launch checklist
 
-## 1. Domain — done
+## 1. Domain
 
-Every canonical, Open Graph URL, `robots.txt` and `sitemap.xml` points at
-`https://thehomeshield.in`.
+Every canonical, Open Graph URL, JSON-LD `@id`, `robots.txt` and `sitemap.xml`
+points at `https://homeshieldofficial.in`.
 
-Two things to line up when DNS is configured:
+Three things to line up when DNS is configured:
 
-- **Serve that exact host.** The canonicals name `thehomeshield.in` with no
-  `www`. Point `www.thehomeshield.in` at a 301 redirect to the bare domain, so
-  only one host ever answers.
+- **Serve that exact host.** The canonicals name `homeshieldofficial.in` with
+  no `www`. Point `www.homeshieldofficial.in` at a 301 redirect to the bare
+  domain, so only one host ever answers.
 - **HTTPS.** Every canonical is `https://`; make sure plain `http://` redirects
   there rather than serving the site twice.
+- **The origin allowlist.** `backend/Code.gs` only accepts form posts from
+  `homeshieldofficial.in` and its `www`. If you change the domain again, change
+  `ALLOWED_ORIGINS` with it and redeploy the Apps Script, or every form will
+  start failing silently.
+
+### If thehomeshield.in was ever live
+
+The site previously named `thehomeshield.in`. If that domain was only ever
+registered — never served, never indexed — ignore this and just point the new
+one at the host.
+
+If it did serve the site, treat this as a domain move rather than a swap:
+
+1. Keep the old domain registered and pointed at the host.
+2. 301-redirect every path on it to the same path on the new domain, not all
+   to the home page — `/products.html` to `/products.html`.
+3. Add both properties in Google Search Console and use **Change of address**
+   on the old one. Without it the new domain starts from nothing.
+4. Leave the redirects up for at least a year. They are what carries the
+   ranking across; removing them early throws it away.
+5. Update the Google Business Profile, and anywhere else the old URL was
+   published.
 
 ## 2. Clean URLs (only if your host does them)
 
@@ -55,7 +77,7 @@ don't re-compress them.
   to find them. (Phone, email, address and the catalogue PDF are done.) When
   you have the real URLs, add them to the `sameAs` array in the `Organization`
   block in `index.html` too, so search engines tie the accounts to the brand.
-- Confirm the 404 returns a 404 status: `curl -I https://thehomeshield.in/nope`.
+- Confirm the 404 returns a 404 status: `curl -I https://homeshieldofficial.in/nope`.
 
 ## 6. Connect the forms — one step left
 

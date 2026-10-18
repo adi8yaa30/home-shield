@@ -19,8 +19,8 @@ var CONFIG = {
   // Only these origins may post. Requests are still accepted if the browser
   // sends no Origin header (some do not); the check is a filter, not a lock.
   ALLOWED_ORIGINS: [
-    'https://thehomeshield.in',
-    'https://www.thehomeshield.in'
+    'https://homeshieldofficial.in',
+    'https://www.homeshieldofficial.in'
   ],
 
   // Set false to stop the emails but keep writing to the sheet.

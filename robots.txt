@@ -12,4 +12,4 @@ Disallow: /*-figma-design*
 # should not turn up as a direct hit in search results.
 Disallow: /assets/home-shield-catalogue.pdf
 
-Sitemap: https://thehomeshield.in/sitemap.xml
+Sitemap: https://homeshieldofficial.in/sitemap.xml

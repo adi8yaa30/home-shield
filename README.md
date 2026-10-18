@@ -62,7 +62,9 @@ app that writes to a Google Sheet and emails a notification. Follow
 `js/ui.js`. Until that is set the forms validate and respond, but nothing is
 recorded.
 
-The site is set up for `https://thehomeshield.in` (no `www`). Serve that exact
-host and redirect `www` and plain `http` to it, so only one URL ever answers.
+The site is set up for `https://homeshieldofficial.in` (no `www`). Serve that
+exact host and redirect `www` and plain `http` to it, so only one URL ever
+answers. The same host is allowlisted in `backend/Code.gs`; the two must agree
+or the forms stop posting.
 
 Still outstanding beyond that: the Instagram and Facebook links.
