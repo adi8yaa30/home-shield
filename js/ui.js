@@ -1364,7 +1364,7 @@
 
     if (!endpointReady()) {
       say('Thanks — this form is not connected to an inbox yet, so nothing has ' +
-          'been sent. Please call us on +91 93954 44686 in the meantime.', true);
+          'been sent. Please call us on +91 73397 60717 in the meantime.', true);
       if (onDone) onDone(false);
       return;
     }
@@ -1377,7 +1377,7 @@
       form.reset();
       form.removeAttribute('data-submitted');
     }).catch(function () {
-      say('Sorry — that did not go through. Please call us on +91 93954 44686.', true);
+      say('Sorry — that did not go through. Please call us on +91 73397 60717.', true);
     }).then(function () {
       if (button) button.disabled = false;
       if (onDone) onDone(true);
