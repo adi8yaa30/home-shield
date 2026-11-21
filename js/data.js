@@ -53,38 +53,38 @@
       folder: 'colored-profile',
       products: [
         {
-          id: 'tt01-bronze',
-          name: 'TT01 Bronze',
+          id: 'hs01-bronze',
+          name: 'HS01 Bronze',
           swatch: '#7a4a17',
           images: ['color-1-slide-1.webp', 'color-1-slide-2.webp']
         },
         {
-          id: 'tt02-deep-brown',
-          name: 'TT02 Deep Brown',
+          id: 'hs02-deep-brown',
+          name: 'HS02 Deep Brown',
           swatch: '#3b2c1e',
           images: ['color-2-slide-1.webp', 'color-2-slide-2.webp']
         },
         {
-          id: 'tt03-deep-green',
-          name: 'TT03 Deep Green',
+          id: 'hs03-deep-green',
+          name: 'HS03 Deep Green',
           swatch: '#17351f',
           images: ['color-3-slide-1.webp', 'color-3-slide-2.webp']
         },
         {
-          id: 'tt04-french-grey',
-          name: 'TT04 French Grey',
+          id: 'hs04-french-grey',
+          name: 'HS04 French Grey',
           swatch: '#b4bab0',
           images: ['color-4-slide-1.webp', 'color-4-slide-2.webp']
         },
         {
-          id: 'tt05-deep-grey',
-          name: 'TT05 Deep Grey',
+          id: 'hs05-deep-grey',
+          name: 'HS05 Deep Grey',
           swatch: '#47524f',
           images: ['color-5-slide-1.webp', 'color-5-slide-2.webp']
         },
         {
-          id: 'tt06-black',
-          name: 'TT06 Black',
+          id: 'hs06-black',
+          name: 'HS06 Black',
           swatch: '#2c2320',
           images: ['color-6-slide-1.webp', 'color-6-slide-2.webp']
         }

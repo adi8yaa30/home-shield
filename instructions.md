@@ -430,12 +430,12 @@ Current finishes:
 
 Current finishes:
 
--   TT01 Bronze
--   TT02 Deep Brown
--   TT03 Deep Green
--   TT04 French Grey
--   TT05 Deep Grey
--   TT06 Black
+-   HS01 Bronze
+-   HS02 Deep Brown
+-   HS03 Deep Green
+-   HS04 French Grey
+-   HS05 Deep Grey
+-   HS06 Black
 
 If additional supplied assets exist for the remaining listed finishes,
 include them. Do not invent names for assets.
@@ -876,12 +876,12 @@ Heading:
 
 Current finishes:
 
--   TT01 Bronze
--   TT02 Deep Brown
--   TT03 Deep Green
--   TT04 French Grey
--   TT05 Deep Grey
--   TT06 Black
+-   HS01 Bronze
+-   HS02 Deep Brown
+-   HS03 Deep Green
+-   HS04 French Grey
+-   HS05 Deep Grey
+-   HS06 Black
 
 Use the supplied swatch colors/assets.
 
